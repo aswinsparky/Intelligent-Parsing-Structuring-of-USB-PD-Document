@@ -1,0 +1,5 @@
+pdfplumber
+openpyxl
+flask
+openai
+google-generativeai

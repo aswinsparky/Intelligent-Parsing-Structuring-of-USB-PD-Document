@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>USB PD Spec Parser</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container">
+    <h1>USB PD Specification Parser</h1>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <label for="file">Upload USB PD PDF:</label>
+        <input type="file" name="file" id="file" accept="application/pdf" required>
+        <button type="submit">Parse</button>
+    </form>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul>
+        {% for message in messages %}
+          <li class="success">{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+    <div class="files">
+        <h2>Download Results</h2>
+        <ul>
+            <li><a href="/download/usb_pd_toc.jsonl" {% if not files['usb_pd_toc.jsonl'] %}style="color:gray;pointer-events:none;"{% endif %}>ToC JSONL</a></li>
+            <li><a href="/download/usb_pd_spec.jsonl" {% if not files['usb_pd_spec.jsonl'] %}style="color:gray;pointer-events:none;"{% endif %}>Sections JSONL</a></li>
+            <li><a href="/download/usb_pd_metadata.jsonl" {% if not files['usb_pd_metadata.jsonl'] %}style="color:gray;pointer-events:none;"{% endif %}>Metadata JSONL</a></li>
+            <li><a href="/download/validation_report.xlsx" {% if not files['validation_report.xlsx'] %}style="color:gray;pointer-events:none;"{% endif %}>Validation Report (XLSX)</a></li>
+        </ul>
+    </div>
+
+
+</div>
+</body>
+</html>
