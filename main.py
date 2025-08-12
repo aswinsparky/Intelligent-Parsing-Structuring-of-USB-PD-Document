@@ -8,7 +8,7 @@ import pdfplumber
 import json
 
 # Use raw string to avoid escape sequence issues
-PDF_PATH = r"C:\grl\usb_pd_parser\usb_pd_spec.pdf"
+PDF_PATH = "##PASTE YOUR PDF PATH HERE##"
 DOC_TITLE = "USB Power Delivery Specification Rev X"
 
 def main():
