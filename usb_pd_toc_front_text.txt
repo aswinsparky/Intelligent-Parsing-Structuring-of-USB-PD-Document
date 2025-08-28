@@ -1,0 +1,688 @@
+Universal Serial Bus
+Power Delivery Specification
+Revision: 3.2
+Version: 1.1
+Release Date: 2024-10
+Revision History
+Revision Version Comments Issue Date
+1.0 1.0 Initial release Revision 1.0 5 July, 2012
+1.0 1.1 Including errata through 31-October-2012 31 October 2012
+1.0 1.2 Including errata through 26-June-2013 26 June, 2013
+1.0 1.3 Including errata through 11-March-2014 11 March 2014
+2.0 1.0 Initial release Revision 2.0 11 August 2014
+2.0 1.1 Including errata through 7-May 2015 7 May 2015
+2.0 1.2 Including errata through 25-March-2016 25 March 2016
+2.0 1.3 Including errata through 11-January-2017 11 January 2017
+3.0 1.0 Initial release Revision 3.0 11 December 2015
+3.0 1.0a Including errata through 25-March-2016 25 March 2016
+3.0 1.1 Including errata through 12-January-2017 12 January 2017
+3.0 1.2 Including errata through 21-June-2018 21 June 2018
+3.0 2.0 Including errata through 29-August-2019 29 August 2019
+3.1 1.0 Including errata through May 2021 May 2021
+3.1 1.1 Including errata through July 2021
+This version incorporates the following ECNs:
+July 2021
+ EPR Clarifications
+Define AMS starting point
+3.1 1.2 Including errata through October 2021
+This version incorporates the following ECNs:
+ Clarify use of Retries
+ Battery Capabilities October 2021
+ FRS timing problem
+ PPS power rule clarifications
+Peak current support for EPR AVS APDO
+3.1 1.3 This version incorporates the following ECNs:
+ Robust EPR Source Operation
+ EPR Source Caps Editorial January 2022
+ SRC PPS behavior in low current request
+Enter USB
+3.1 1.4 Editorial changes
+This version incorporates the following ECNs:
+ Capabilities Mismatch Update April 2022
+ Chunking Timing Issue
+OT Mitigation
+Page 2 Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Revision Version Comments Issue Date
+3.1 1.5 Editorial changes
+This version incorporates the following ECNs:
+ Timer Description Corrections July 2022
+ Change Source_Info Requirements
+AMS Update
+3.1 1.6 Editorial changes
+This version incorporates the following ECNs:
+ USB4® V2 Updates
+ Data Reset Issues
+October 2022
+ Increase tSenderResponse
+ PPS Power Limit Bit Update
+ Support for Asymmetric Mode
+Timer Description Corrections Revisited
+3.1 1.7 Editorial Changes
+This version incorporates the following ECNs:
+ Data Reset Invalid Reject Handling
+January 2023
+ Source request
+ Source Transition
+EPR Entry
+3.1 1.8 Editorial Changes
+This version incorporates the following ECNs:
+ Slew rate exemption for Power Role Swap.
+ EUDO cable speed clarification. April 2023
+ Update to PPS Requirements.
+ Deprecate Interruptibility.
+Section 7.3 restructure and update.
+3.1 1.9 Editorial Changes July 2023
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10 Page 3
+Revision Version Comments Issue Date
+3.2 1.0 This version incorporates the following ECNs:
+ VDM-use Conditions.
+ tTypeCSinkWaitCap.
+ tFirstSourceCap Clarification
+ Hard Reset Clarification. October 2023
+ Unrecognized Country Code
+ EPR Entry Process-1
+ SPR AVS Definition
+EPR Power Rules Clarifications
+3.2 1.1 This version incorporates the following ECNs:
+ Power Transition time from EPR to PR_Swap
+ Capabilities Mismatch Update
+Deprecate GotoMin and GiveBack Features and Update
+ Power Reserve
+ EPR Entry requirements Clarification
+ EPRMDO and Entry Clarification.
+ Remove 10.2.4 power sharing between ports
+ Source PDP rating field clarifications
+ Source Power Rules update. October 2024
+ Source_Info Message Clarifications.
+ Correction to BMC description.
+ EPR Source cap clarification.
+ Delaying of VCONN Swap.
+ EPR_Request in SPR Mode.
+ Generic transition diagram.
+ Removing the usage of Ping message
+ Sink Standby
+Source Info Support
+Page 4 Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+LIMITED COPYRIGHT LICENSE
+THE USB 3.0 PROMOTERS GRANT A CONDITIONAL COPYRIGHT LICENSE UNDER THE COPYRIGHTS EMBODIED
+IN THE USB POWER DELVERY SPECIFICATION TO USE AND REPRODUCE THE SPECIFICATION FOR THE SOLE
+PURPOSE OF, AND SOLELY TO THE EXTENT NECESSARY FOR, EVALUATING WHETHER TO IMPLEMENT THE
+SPECIFICATION IN PRODUCTS THAT WOULD COMPLY WITH THE SPECIFICATION. WITHOUT LIMITING THE
+FOREGOING, USE THE OF SPECIFICATION FOR THE PURPOSE OF FILING OR MODIFYING ANY PATENT
+APPLICATION TO TARGET THE SPECIFICATION OR USB COMPLIANT PRODUCTS IS NOT AUTHORIZED. EXCEPT
+FOR THIS EXPRESS COPYRIGHT LICENSE, NO OTHER RIGHTS OR LICENSES ARE GRANTED, INCLUDING
+WITHOUT LIMITATION ANY PATENT LICENSES. IN ORDER TO OBTAIN ANY ADDITIONALY INTELLECTUAL
+PROPERTY LICENSES OR LICENSING COMMITMENTS ASSOCIATED WITH THE SPECIFICATION A PARTY MUST
+EXECUTE THE USB 3.0 ADOPTERS AGREEMENT. NOTE: BY USING THE SPECIFICATION, YOU ACCEPT THESE
+LICENSE TERMS ON YOUR OWN BEHALF AND, IN THE CASE WHERE YOU ARE DOING THIS AS AN EMPLOYEE, ON
+BIENHTALEF OLF LYOEUCR ETMUPLAOYLER .PROPERTY DISCLAIMER
+THIS SPECIFICATION IS PROVIDED TO YOU "AS IS" WITH NO WARRANTIES WHATSOEVER, INCLUDING ANY
+WARRANTY OF MERCHANTABILITY, NON-INFRINGEMENT, OR FITNESS FOR ANY PARTICULAR PURPOSE. THE
+AUTHORS OF THIS SPECIFICATION DISCLAIM ALL LIABILITY, INCLUDING LIABILITY FOR INFRINGEMENT OF
+ANY PROPRIETARY RIGHTS, RELATING TO USE OR IMPLEMENTATION OF INFORMATION IN THIS
+SPECIFICATION. THE PROVISION OF THIS SPECIFICATION TO YOU DOES NOT PROVIDE YOU WITH ANY LICENSE,
+EXPRESS OR IMPLIED, BY ESTOPPEL OR OTHERWISE, TO ANY INTELLECTUAL PROPERTY RIGHTS.
+® ®
+USB Type-C and USB4 are trademarks of the Universal Serial Bus Implementers Forum (USB-IF).
+® ® ®
+USB Type-C , USB-C and USB4 are trademarks of the Universal Serial Bus Implementers Forum (USB-IF).
+DisplayPort™ is a trademark of VESA. Thunderbolt™ is a trademark of Intel Corporation. All product names are
+trademarks, registered trademarks, or service marks of their respective owners.
+http://usb.org/
+cYoomu pmliaayn coenly use the Thunderbolt™ trademark or logo in conjunction with products designed to this specification
+that complete proper certification and executing a Thunderbolt™ trademark license - see
+for further information.
+All product names are trademarks, registered trademarks, or service marks of their respective owners.
+Copyright © 2010- 2024, USB 3.0 Promoter Group: Apple Inc., Hewlett-Packard Inc., Intel Corporation, Microsoft
+Corporation, Renesas, STMicroelectronics, and Texas Instruments.
+All rights reserved.
+techsup@usb.org
+Please send comments via electronic mail to . http://www.usb.org
+For industry information, refer to the USB Implementers Forum web page at .
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10 Page 5
+Editors
+Bob Dunstan
+CRoicnhatrdr Pietbrieutors
+Charles Wang ACON, Advanced-Connectek, Inc. Zaki Moussaoui Apple
+Conrad Choy ACON, Advanced-Connectek, Inc. Jeff Liu ASMedia Technology Inc.
+Dennis Chuang ACON, Advanced-Connectek, Inc. Kuo Lung Li ASMedia Technology Inc.
+Steve Sedio ACON, Advanced-Connectek, Inc. Ming-Wei Hsu ASMedia Technology Inc.
+Sunney Yang ACON, Advanced-Connectek, Inc. PS Tseng ASMedia Technology Inc.
+Vicky Chuang ACON, Advanced-Connectek, Inc. Sam Tzeng ASMedia Technology Inc.
+Joseph Scanlon Advanced Micro Devices Thomas Hsu ASMedia Technology Inc.
+Sujan Thomas Advanced Micro Devices Weikao Chang ASMedia Technology Inc.
+Caspar Lin Allion Labs, Inc. Yang Cheng ASMedia Technology Inc.
+Casper Lee Allion Labs, Inc. Aaron Hou Bizlink Technology Inc.
+Danny Shih Allion Labs, Inc. Shawn Meng Bizlink Technology Inc.
+Howard Chang Allion Labs, Inc. Bernard Shyu Bizlink Technology, Inc.
+Greg Stewart Analogix Semiconductor, Inc. Eric Wu Bizlink Technology, Inc.
+Mehran Badii Analogix Semiconductor, Inc. Morphy Hsieh Bizlink Technology, Inc.
+Alexei Kosut Apple Sean O'Neal Bizlink Technology, Inc.
+Bill Cornelius Apple Tiffany Hsiao Bizlink Technology, Inc.
+Carlos Colderon Apple Weichung Ooi Bizlink Technology, Inc.
+Chris Uiterwijk Apple Rahul Bhushan Broadcom Corp.
+Colin Whitby-Strevens Apple Asila nahas Cadence Design Systems, Inc.
+Corey Axelowitz Apple Claire Ying Cadence Design Systems, Inc.
+Corey Lange Apple Jie min Cadence Design Systems, Inc.
+Dave Conroy Apple Mark Summers Cadence Design Systems, Inc.
+David Sekowski Apple Michal Staworko Cadence Design Systems, Inc.
+Girault Jones Apple Sathish Kumar Ganesan Cadence Design Systems, Inc.
+James Orr Apple Alessandro Ingrassia Canova Tech
+Jason Chung Apple Andrea Colognese Canova Tech
+Jay Kim Apple Antonio Orzelli Canova Tech
+Jeff Wilcox Apple Davide Ghedin Canova Tech
+Jennifer Tsai Apple Matteo Casalin Canova Tech
+Karl Bowers Apple Michael Marioli Canova Tech
+Keith Porthouse Apple Nicola Scantamburlo Canova Tech
+Kevin Hsiue Apple Paolo Pilla Canova Tech
+Matt Mora Apple Ray Huang Canyon Semiconductor
+Paul Baker Apple Yi-Feng Lin Canyon Semiconductor
+Reese Schreiber Apple YuHung Lin Canyon Semiconductor
+Ricardo Janezic Pregitzer Apple David Tsai Chrontel, Inc.
+Ruchi Chaturvedi Apple Anshul Gulati Cypress Semiconductor
+Sameer Kelkar Apple Anup Nayak Cypress Semiconductor
+Sasha Tietz Apple Benjamin Kropf Cypress Semiconductor
+Scott Jackson Apple Dhanraj Rajput Cypress Semiconductor
+Sree Raman Apple Ganesh Subramaniam Cypress Semiconductor
+William Ferry Apple Jagadeesan Raj Cypress Semiconductor
+Page 6 Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Junjie cui Cypress Semiconductor Chien-Cheng Kuo eEver Technology, Inc.
+Manu Kumar Cypress Semiconductor Shyanjia Chen eEver Technology, Inc.
+Muthu M Cypress Semiconductor Abel Astley Ellisys
+Nicholas Bodnaruk Cypress Semiconductor Chuck Trefts Ellisys
+Pradeep Bajpai Cypress Semiconductor Emmanuel Durin Ellisys
+Rajaram R Cypress Semiconductor Mario Pasquali Ellisys
+Rama Vakkantula Cypress Semiconductor Tim Wei Ellisys
+Rushil Kadakia Cypress Semiconductor Chien-Cheng Kuo Etron Technology, Inc.
+Simon Nguyen Cypress Semiconductor Jack Yang Etron Technology, Inc.
+Steven Wong Cypress Semiconductor Richard Crisp Etron Technology, Inc.
+Subu Sankaran Cypress Semiconductor Shyanjia Chen Etron Technology, Inc.
+Sumeet Gupta Cypress Semiconductor TsungTa Lu Etron Technology, Inc.
+Tejender Sheoran Cypress Semiconductor Christian Klein Fairchild Semiconductor
+Venkat Mandagulathar Cypress Semiconductor Oscar Freitas Fairchild Semiconductor
+Xiaofeng Shen Cypress Semiconductor Souhib Harb Fairchild Semiconductor
+Zeng Wei Cypress Semiconductor Amanda Ying Feature Integration Technology Inc.
+Adie Tan Dell Inc. Jacky Chan Feature Integration Technology Inc.
+Adolfo Montero Dell Inc. Kenny Hsieh Feature Integration Technology Inc.
+Bruce Montag Dell Inc. KungAn Lin Feature Integration Technology Inc.
+Gary Verdun Dell Inc. Paul Yang Feature Integration Technology Inc.
+Ken Nicholas Dell Inc. Su Jaden Feature Integration Technology Inc.
+Marcin Nowak Dell Inc. Yu-Lin Chu Feature Integration Technology Inc.
+Merle Wood Dell Inc. Yulin Lan Feature Integration Technology Inc.
+Mohammed Hijazi Dell Inc. AJ Yang Foxconn / Hon Hai
+Siddhartha Reddy Dell Inc. Bob Hall Foxconn / Hon Hai
+Terry Matula Dell Inc. Chihyin Kan Foxconn / Hon Hai
+Jay Hu Derun Semiconductor Fred Fons Foxconn / Hon Hai
+Shelly Liu Derun Semiconductor Jie Zheng Foxconn / Hon Hai
+Bindhu Vasu Dialog Semiconductor (UK) Ltd Patrick Casher Foxconn / Hon Hai
+Chanchal Gupta Dialog Semiconductor (UK) Ltd Shruti Deore Foxconn / Hon Hai
+Dipti Baheti Dialog Semiconductor (UK) Ltd Steve Sedio Foxconn / Hon Hai
+Duc Doan Dialog Semiconductor (UK) Ltd Terry Little Foxconn / Hon Hai
+Holger Petersen Dialog Semiconductor (UK) Ltd Bob McVay Fresco Logic Inc.
+Jianming Yao Dialog Semiconductor (UK) Ltd Christopher Meyers Fresco Logic Inc.
+John Shi Dialog Semiconductor (UK) Ltd Dian Kurniawan Fresco Logic Inc.
+KE Hong Dialog Semiconductor (UK) Ltd Tom Burton Fresco Logic Inc.
+Kevin Mori Dialog Semiconductor (UK) Ltd Abraham Levkoy Google Inc.
+Larry Ping Dialog Semiconductor (UK) Ltd Adam Rodriguez Google Inc.
+Mengfei Liu Dialog Semiconductor (UK) Ltd Alec Berg Google Inc.
+Scott Brown Dialog Semiconductor (UK) Ltd Bartosz Szpila Google Inc.
+Yimin Chen Dialog Semiconductor (UK) Ltd Benson Leung Google Inc.
+Yong Li Dialog Semiconductor (UK) Ltd Chao Fei Google Inc.
+Justin Lee Diodes Incorporated Dave Bernard Google Inc.
+Dan Ellis DisplayLink (UK) Ltd. David Schneider Google Inc.
+Jason Young DisplayLink (UK) Ltd. Diana Zigterman Google Inc.
+Kevin Jacobs DisplayLink (UK) Ltd. Eric Herrmann Google Inc.
+Paulo Alcobia DisplayLink (UK) Ltd. George-Daniel Matei Google Inc.
+Peter Burgers DisplayLink (UK) Ltd. Jameson Thies Google Inc.
+Richard Petrie DisplayLink (UK) Ltd. Jim Guerin Google Inc.
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10 Page 7
+Juan Fantin Google Inc. Lee Leppo HP Inc.
+Ken Wu Google Inc. Rahul Lakdawala HP Inc.
+Kyle Tso Google Inc. Robin Castell HP Inc.
+Mark Hayter Google Inc. Roger Benson HP Inc.
+Nathan Kolluru Google Inc. Steve Chen HP Inc.
+Nithya Jagannathan Google Inc. Bai Sean Huawei Technologies Co., Ltd.
+Srikanth Lakshmikanthan Google Inc. Chunjiang Zhao Huawei Technologies Co., Ltd.
+Todd Broch Google Inc. JianQuan Wu Huawei Technologies Co., Ltd.
+Toshak Singhal Google Inc. Li Zongjian Huawei Technologies Co., Ltd.
+Vincent Palatin Google Inc. Liansheng Zheng Huawei Technologies Co., Ltd.
+Xuelin Wu Google Inc. Lihua Duan Huawei Technologies Co., Ltd.
+Zhenxue Xu Google Inc. Min Chen Huawei Technologies Co., Ltd.
+Alan Kinningham Granite River Labs Wang Feng Huawei Technologies Co., Ltd.
+Anand Murugan Granite River Labs Wei Haihong Huawei Technologies Co., Ltd.
+Balamurugan Manialagan Granite River Labs Zhenning Shi Huawei Technologies Co., Ltd.
+Medipalli Sowmya Granite River Labs James Xie Hynetek Semiconductor Co., Ltd
+Mike Engbretson Granite River Labs Yingyang Ou Hynetek Semiconductor Co., Ltd
+Mike Wu Granite River Labs Robert Heaton Indie Semiconductor
+Mukesh Tatiya Granite River Labs Vincent Wang Indie Semiconductor
+Naresh Botsa Granite River Labs Benjamin Kropf Infineon Technologies
+PoornaKumar M. Granite River Labs Sie Boo Chiang Infineon Technologies
+Prajwal Rathod Granite River Labs Tue Fatt David Wee Infineon Technologies
+Rajaraman V Granite River Labs Wee Tar Richard Ng Infineon Technologies
+Saai Ghoutham Revathi
+Granite River Labs Wolfgang Furtner Infineon Technologies
+Selvam
+Sivan Perumal Granite River Labs Aruni Nelson Intel Corporation
+Sivaram Murugesan Granite River Labs Bob Dunstan Intel Corporation
+Tim Lin Granite River Labs Brad Saunders Intel Corporation
+Vijay S. Granite River Labs Chee Lim Nge Intel Corporation
+Vijayakumar P Granite River Labs Christine Krause Intel Corporation
+Vishal Kakade Granite River Labs Chuen Ming Tan Intel Corporation
+Yogeshwaran Venkatesan Granite River Labs Dan Froelich Intel Corporation
+GuangDong OPPO Mobile
+Jerry Qin David Harriman Intel Corporation
+Telecommunications Corp., Ltd.
+Alan Berkema Hewlett Packard David Hines Intel Corporation
+Lee Atkinson Hewlett Packard David Thompson Intel Corporation
+Rahul Lakdawala Hewlett Packard Guobin Liu Intel Corporation
+Robin Castell Hewlett Packard Harry Skinner Intel Corporation
+Ron Schooley Hewlett Packard Henrik Leegaard Intel Corporation
+Steve Chen Hewlett Packard Jenn Chuan Cheng Intel Corporation
+Suketa Partiwala Hewlett Packard Jervis Lin Intel Corporation
+Vaibhav Malik Hewlett Packard John Howard Intel Corporation
+Walter Fry Hewlett Packard Karthi Vadivelu Intel Corporation
+Hideyuki HAYAFUJI Hosiden Corporation Leo Heiland Intel Corporation
+Keiji Mine Hosiden Corporation Maarit Harkonen Intel Corporation
+Masaki Yamaoka Hosiden Corporation Nge Chee Lim Intel Corporation
+Takashi Muto Hosiden Corporation Paul Durley Intel Corporation
+Yasunori Nishikawa Hosiden Corporation Rahman Ismail Intel Corporation
+Alan Berkema HP Inc. Rajaram Regupathy Intel Corporation
+Kenneth Chan HP Inc. Ronald Swartz Intel Corporation
+Lee Atkinson HP Inc. Sarah Sharp Intel Corporation
+Page 8 Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Steve McGowan Intel Corporation Eric Wen Luxshare-ICT
+Tim McKee Intel Corporation James Kirk Luxshare-ICT
+Toby Opferman Intel Corporation James Stevens Luxshare-ICT
+Uma Medepalli Intel Corporation Josue Castillo Luxshare-ICT
+Venkataramani
+Intel Corporation Pat Young Luxshare-ICT
+Gopalakrishnan
+Ziv Kabiry Intel Corporation Scott Shuey Luxshare-ICT
+Jia Wei Intersil Corporation Stone Lin Luxshare-ICT
+iST - Integrated Service
+Weijie Huang Chikara Kakizawa Maxim Integrated Products
+Technology Inc.
+Al Hsiao ITE Tech. Inc. Jacob Scott Maxim Integrated Products
+Greg Song ITE Tech. Inc. Ken Helfrich Maxim Integrated Products
+Richard Guo ITE Tech. Inc. Michael Miskho Maxim Integrated Products
+Victor Lin ITE Tech. Inc. Chris Yokum MCCI Corporation
+Y.C. Chou ITE Tech. Inc. Geert Knapen MCCI Corporation
+Japan Aviation Electronics
+Kenta Minejima Terry Moore MCCI Corporation
+Industry Ltd. (JAE)
+Japan Aviation Electronics
+Mark Saubert Velmurugan Selvaraj MCCI Corporation
+Industry Ltd. (JAE)
+Japan Aviation Electronics
+Toshio Shimoyama Tung-Sheng Lin MediaTek Inc.
+Industry Ltd. (JAE)
+Brian Fetz Keysight Technologies Inc. Satoru Kumashiro MegaChips Corporation
+Jit Lim Keysight Technologies Inc. Brian Marley Microchip Technology Inc.
+Koji Asakawa Kinetic Technologies Inc. Dave Perchlik Microchip Technology Inc.
+Babu Mailachalam Lattice Semiconductor Corp Don Perkins Microchip Technology Inc.
+Gianluca Mariani Lattice Semiconductor Corp Fernando Gonzalez Microchip Technology Inc.
+Joel Coplen Lattice Semiconductor Corp John Sisto Microchip Technology Inc.
+Thomas Watza Lattice Semiconductor Corp Josh Averyt Microchip Technology Inc.
+Vesa Lauri Lattice Semiconductor Corp Kiet Tran Microchip Technology Inc.
+Bruce Chuang Leadtrend Mark Bohm Microchip Technology Inc.
+Eilian Liu Leadtrend Matthew Kalibat Microchip Technology Inc.
+Chetan Kopalle LeCroy Corporation Mick Davis Microchip Technology Inc.
+Daniel H Jacobs LeCroy Corporation Prasanna Vengateshan Microchip Technology Inc.
+Jake Jacobs LeCroy Corporation Rich Wahler Microchip Technology Inc.
+Kimberley McKay LeCroy Corporation Richard Petrie Microchip Technology Inc.
+Mike Engbretson LeCroy Corporation Ronald Kunin Microchip Technology Inc.
+Mike Micheletti LeCroy Corporation Shannon Cash Microchip Technology Inc.
+Roy Chestnut LeCroy Corporation Thomas Farkas Microchip Technology Inc.
+Venkataraman
+Tyler Joe LeCroy Corporation Microchip Technology Inc.
+Krishnamoorthy
+Phil Jakes Lenovo Andrew Yang Microsoft Corporation
+Do Kyun Kim LG electronics Anthony Chen Microsoft Corporation
+Won-Jong Choi LG electronics Arvind Murching Microsoft Corporation
+Won-Jong Choi LG Electronics Ltd. Dave Perchlik Microsoft Corporation
+Aaron Melgar Lion Semiconductor David Voth Microsoft Corporation
+Chris Zhou Lion Semiconductor Geoff Shew Microsoft Corporation
+Sehyung Jeon Lion Semiconductor Jayson Kastens Microsoft Corporation
+Wonyoung Kim Lion Semiconductor Kai Inha Microsoft Corporation
+Yongho Kim Lion Semiconductor Marwan Kadado Microsoft Corporation
+Dave Thompson LSI Corporation Michelle Bergeron Microsoft Corporation
+Alan Kinningham Luxshare-ICT Nathan Sherman Microsoft Corporation
+Alan Liu Luxshare-ICT Rahul Ramadas Microsoft Corporation
+Scott Brenden Intel Corporation Randy Aull Microsoft Corporation
+Sridharan Ranganathan Intel Corporation Shiu Ng Microsoft Corporation
+Daniel Chen Luxshare-ICT Tieyong Yin Microsoft Corporation
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10 Page 9
+Timo Toivola Microsoft Corporation Hung-Chih Chiu Power Forest Technology Corporation
+Toby Nixon Microsoft Corporation Jay Tu Power Forest Technology Corporation
+Vahid Vassey Microsoft Corporation Adel Lahham Power Integrations
+Vivek Gupta Microsoft Corporation Aditya Kulkarni Power Integrations
+Yang You Microsoft Corporation Akshay Nayaknur Power Integrations
+Adib Al Abaji Molex LLC Amruta Patra Power Integrations
+Aaron Xu Monolithic Power Systems Inc. K R Rahul Raj Power Integrations
+Bo Zhou Monolithic Power Systems Inc. Kaushik Raam Power Integrations
+Christian Sporck Monolithic Power Systems Inc. Rahul Joshi Power Integrations
+Di Han Monolithic Power Systems Inc. Ricardo Pregiteer Power Integrations
+Zhihong Yu Monolithic Power Systems Inc. Shruti Anand Power Integrations
+Dan Wagner Motorola Mobility Inc. Amit gupta Qualcomm, Inc
+Ben Crowe MQP Electronics Ltd. George Paparrizos Qualcomm, Inc
+Pat Crowe MQP Electronics Ltd. Giovanni Garcea Qualcomm, Inc
+Sten Carlsen MQP Electronics Ltd. Jack Pham Qualcomm, Inc
+Kenji Oguma NEC Corporation James Goel Qualcomm, Inc
+ChinJui Lin Nexperia B.V. Joshua Warner Qualcomm, Inc
+Max Guan Nexperia B.V. Karyn Vuong Qualcomm, Inc
+Stefan Seider Nexperia B.V. Lalan Mishra Qualcomm, Inc
+Frank Borngräber Nokia Corporation Nicholas Cadieux Qualcomm, Inc
+Kai Inha Nokia Corporation Vamsi Samavedam Qualcomm, Inc
+Pekka Leinonen Nokia Corporation Vatsal Patel Qualcomm, Inc
+Richard Petrie Nokia Corporation Chris Sporck Qualcomm, Inc.
+Sten Carlsen Nokia Corporation Craig Aiken Qualcomm, Inc.
+Abhijeet Kulkarni NXP Semiconductors Narendra Mehta Qualcomm, Inc.
+Ahmad Yazdi NXP Semiconductors Terry Remple Qualcomm, Inc.
+Bart Vertenten NXP Semiconductors Will Kun Qualcomm, Inc.
+Dennis Ha NXP Semiconductors Yoram Rimoni Qualcomm, Inc.
+Dong Nguyen NXP Semiconductors Fan-Hau Hsu Realtek Semiconductor Corp.
+Guru Prasad NXP Semiconductors Tsung-Peng Chuang Realtek Semiconductor Corp.
+Ken Jaramillo NXP Semiconductors Atsushi Mitamura Renesas Electronics Corp.
+Krishnan TN NXP Semiconductors Bob Dunstan Renesas Electronics Corp.
+Michael Joehren NXP Semiconductors Brian Allen Renesas Electronics Corp.
+Robert de Nie NXP Semiconductors Dan Aoki Renesas Electronics Corp.
+Rod Whitby NXP Semiconductors Fengshuan Zhou Renesas Electronics Corp.
+Vijendra Kuroodi NXP Semiconductors Hajime Nozaki Renesas Electronics Corp.
+Winston Langeslag NXP Semiconductors John Carpenter Renesas Electronics Corp.
+Robert Heaton Obsidian Technology Kiichi Muto Renesas Electronics Corp.
+Andrew Yoo ON Semiconductor Masami Katagiri Renesas Electronics Corp.
+Brady Maasen ON Semiconductor Nobuo Furuya Renesas Electronics Corp.
+Bryan McCoy ON Semiconductor Patrick Yu Renesas Electronics Corp.
+Christian Klein ON Semiconductor Peter Teng Renesas Electronics Corp.
+Cor Voorwinden ON Semiconductor Philip Leung Renesas Electronics Corp.
+Edward Berrios ON Semiconductor Steve Roux Renesas Electronics Corp.
+Michael Smith ON Semiconductor Tetsu Sato Renesas Electronics Corp.
+Oscar Freitas ON Semiconductor Toshifumi Yamaoka Renesas Electronics Corp.
+Tom Duffy ON Semiconductor Yimin Chen Renesas Electronics Corp.
+Brian Collins Parade Technologies Inc. Chunan Kuo Richtek Technology Corporation
+Craig Wiley Parade Technologies Inc. Heinz Wei Richtek Technology Corporation
+Page 10 Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Max Huang Richtek Technology Corporation Shannon Cash SMSC
+TZUHSIEN CHUANG Richtek Technology Corporation Mark Bohm SMSC
+Tatsuya Irisawa Ricoh Company Ltd. Tim Knowlton SMSC
+Akihiro Ono Rohm Co. Ltd. William Chiechi SMSC
+Chris Lin Rohm Co. Ltd. Shigenori Tagami Sony Corporation
+Hidenori Nishimoto Rohm Co. Ltd. Shinichi Hirata Sony Corporation
+Kris Bahar Rohm Co. Ltd. Amanda Hosler Specwerkz
+Manabu Miyata Rohm Co. Ltd. Bob Dunstan Specwerkz
+Ruben Balbuena Rohm Co. Ltd. Brad Saunders Specwerkz
+Takashi Sato Rohm Co. Ltd. Diane Lenox Specwerkz
+Vijendra Kuroodi Rohm Co. Ltd. Michael Munn StarTech.com Ltd.
+Yusuke Kondo Rohm Co. Ltd. Fabien Friess ST-Ericsson
+Kazuomi Nagai ROHM Co., Ltd. Giuseppe Platania ST-Ericsson
+Matti Kulmala Salcomp Plc Jean-Francois Gatto ST-Ericsson
+Toni Lehimo Salcomp Plc Milan Stamenkovic ST-Ericsson
+Edward Lee Samsung Electronics Co. Ltd. Nicolas Florenchie ST-Ericsson
+Tong Kim Samsung Electronics Co. Ltd. Patrizia Milazzo ST-Ericsson
+Amit Bouzaglo Scosche Industries Christophe Cochard STMicroelectronics
+Alvin Cox Seagate Technology LLC Christophe Lorin STMicroelectronics
+Emmanuel Lemay Seagate Technology LLC Filippo Bonaccorso STMicroelectronics
+John Hein Seagate Technology LLC Jessy Guilbot STMicroelectronics
+Marc Noblitt Seagate Technology LLC Joel Huloux STMicroelectronics
+Michael Morgan Seagate Technology LLC John Bloomfield STMicroelectronics
+Ronald Rueckert Seagate Technology LLC Massimo Panzica STMicroelectronics
+Tony Priborsky Seagate Technology LLC Meriem Mersel STMicroelectronics
+Chin Chang Semtech Corporation Nathalie Ballot STMicroelectronics
+Tom Farkas Semtech Corporation Pascal Legrand STMicroelectronics
+Ankit Garg Siemens Industry Software Inc. Patrizia Milazzo STMicroelectronics
+Ning Dai Silergy Corp. Richard O’Connor STMicroelectronics
+Wanfeng Zhang Silergy Corp. Morten Christiansen Synopsys, Inc.
+Kafai Leung Silicon Laboratories, Inc. Nivin George Synopsys, Inc.
+Kok Hong Soh Silicon Laboratories, Inc. Prishkit Abrol Synopsys, Inc.
+Sorin Badiu Silicon Laboratories, Inc. Zongyao Wen Synopsys, Inc.
+Steven Ghang Silicon Laboratories, Inc. Joan Marrinan Tektronix
+SiliConch Systems Private
+Abhishek Sardeshpande Kimberley McKay Teledyne-LeCroy
+Limited
+SiliConch Systems Private
+Aniket Mathad Matthew Dunn Teledyne-LeCroy
+Limited
+SiliConch Systems Private
+Chandana N Tony Minchell Teledyne-LeCroy
+Limited
+SiliConch Systems Private
+Jaswanth Ammineni Anand Dabak Texas Instruments
+Limited
+SiliConch Systems Private
+Jinisha Patel Annamalai Kasthuri Texas Instruments
+Limited
+SiliConch Systems Private BIJU Erayamkot
+Kaustubh Kumar Texas Instruments
+Limited Panayamthatta
+SiliConch Systems Private
+Nitish Bill Waters Texas Instruments
+Limited
+SiliConch Systems Private
+Pavitra Balasubramanian Bing Lu Texas Instruments
+Limited
+SiliConch Systems Private
+Rakesh Polasa Deric Waters Texas Instruments
+Limited
+SiliConch Systems Private
+Satish Anand Verkila Grant Ley Texas Instruments
+Limited
+SiliConch Systems Private
+Shubham Paliwal Gregory Watkins Texas Instruments
+Limited
+SiliConch Systems Private
+Vishnu Pusuluri Ingolf Frank Texas Instruments
+Limited
+John Sisto SMSC Ivo Huber Texas Instruments
+Ken Gay SMSC Javed Ahmad Texas Instruments
+Richard Wahler SMSC Jean Picard Texas Instruments
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10 Page 11
+John Perry Texas Instruments
+Kasthuri Annamalai Texas Instruments
+Martin Patoka Texas Instruments
+Mike Campbell Texas Instruments
+Scott Jackson Texas Instruments
+Shafiuddin Mohammed Texas Instruments
+Srinath Hosur Texas Instruments
+Steven Tom Texas Instruments
+Yoon Lee Texas Instruments
+Tim Wilhelm The Silanna Group Pty. Ltd.
+Tod Wolf The Silanna Group Pty. Ltd.
+Chris Yokum Total Phase
+Dylan Su UL LLC
+Eric Wall UL LLC
+Jason Smith UL LLC
+Terry Kao UL LLC
+Steven Chen Unigraf OY
+Topi Lampiranta Unigraf OY
+Brad Cox Ventev Mobile
+Colin Vose Ventev Mobile
+Dydron Lin VIA Technologies, Inc.
+Fong-Jim Wang VIA Technologies, Inc.
+Jay Tseng VIA Technologies, Inc.
+Rex Chang VIA Technologies, Inc.
+Terrance Shih VIA Technologies, Inc.
+Ho Wen Tsai Weltrend Semiconductor
+Hung Chiang Weltrend Semiconductor
+Jeng Cheng Liu Weltrend Semiconductor
+Priscilla Lee Weltrend Semiconductor
+Wayne Lo Weltrend Semiconductor
+Western Digital Technologies,
+Charles Neumann
+Inc.
+Western Digital Technologies,
+Curtis Stevens
+Inc.
+Western Digital Technologies,
+John Maroney
+Inc.
+Joe O'Brien Wilder Technologies
+Will Miller Wilder Technologies
+Canfeng Chen Xiaomi Communications Co., Ltd.
+Juejia Zhou Xiaomi Communications Co., Ltd.
+Xiaoxing Yang Xiaomi Communications Co., Ltd.
+Zhuhai Smartware Technology
+Liu Qiong
+Co., Ltd.
+Zhuhai Smartware Technology
+Long Zhang
+Co., Ltd.
+Zhuhai Smartware Technology
+Yuanchao Liang
+Co., Ltd.
+Page 12 Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Table Of Contents
+Revision History . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .2
+LIMITED COPYRIGHT LICENSE . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .5
+INTELLECTUAL PROPERTY DISCLAIMER . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .5
+Editors . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .6
+Contributors . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .6
+Table Of Contents . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .13
+List of Figures . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .19
+List of Tables . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .27
+1 Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .34
+1.1 Overview............................................................................................................................................ 34
+1.2 Purpose.............................................................................................................................................. 35
+1.2.1 Scope ..............................................................................................................................................................................36
+1.3 Section Overview........................................................................................................................... 36
+1.4 Conventions...................................................................................................................................... 37
+1.4.1 Precedence ..................................................................................................................................................................37
+1.4.2 Keywords .....................................................................................................................................................................37
+1.4.3 Numbering ..................................................................................................................................................................38
+1.5 Related Documents....................................................................................................................... 39
+1.6 Terms and Abbreviations........................................................................................................... 40
+1.7 Parameter Values........................................................................................................................... 52
+1.8 Changes from Revision 3.0......................................................................................................... 52
+1.9 Compatibility with Revision 2.0.............................................................................................. 52
+2 Overview . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .53
+2.1 Introduction..................................................................................................................................... 53
+2.1.1 Power Delivery Source Operational Contracts ............................................................................................53
+2.1.2 Power Delivery Contract Negotiation .............................................................................................................53
+2.1.3 Other Uses for Power Delivery ...........................................................................................................................54
+2.2 Compatibility with Revision 2.0.............................................................................................. 54
+2.3 USB Power Delivery Capable Devices................................................................................... 55
+2.4 SOP* Communication................................................................................................................... 57
+2.4.1 Introduction ................................................................................................................................................................57
+2.4.2 SOP* Collision Avoidance ......................................................................................................................................57
+2.4.3 SOP Communication ...............................................................................................................................................57
+2.4.4 SOP'/SOP'' Communication with Cable Plugs ..............................................................................................57
+2.5 Operational Overview.................................................................................................................. 59
+2.5.1 Source Operation ......................................................................................................................................................59
+2.5.2 Sink Operation ...........................................................................................................................................................62
+2.5.3 Cable Plugs ..................................................................................................................................................................65
+2.6 Architectural Overview............................................................................................................... 66
+2.6.1 Policy .............................................................................................................................................................................69
+2.6.2 Message Formation and Transmission ...........................................................................................................70
+2.6.3 Collision Avoidance .................................................................................................................................................70
+2.6.4 Power supply .............................................................................................................................................................71
+2.6.5 DFP/UFP ......................................................................................................................................................................71
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10 Page 13
+2.6.6 Cable and Connectors .............................................................................................................................................72
+2.6.7 Interactions between Non-PD, BC, and PD devices ...................................................................................72
+2.6.8 Power Rules ................................................................................................................................................................72
+2.7 Extended Power Range (EPR) Operation............................................................................ 73
+2.8 Charging Models............................................................................................................................. 75
+2.8.1 Fixed Supply Charging Models ...........................................................................................................................75
+2.8.2 Programmable Power Supply (PPS) Charging Models ............................................................................75
+2.8.3 Adjustable Voltage Supply (AVS) Charging Models ..................................................................................76
+3 USB Type-A and USB Type-B Cable Assemblies and Connectors . . . . . .77
+4 Electrical Requirements. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .78
+4.1 Interoperability with other USB Specifications................................................................ 78
+4.2 Dead Battery Detection / Unpowered Port Detection................................................... 78
+4.3 Cable IR Ground Drop (IR Drop)............................................................................................. 78
+4.4 Cable Type Detection.................................................................................................................... 78
+5 Physical Layer . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .79
+5.1 Physical Layer Overview............................................................................................................ 79
+5.2 Physical Layer Functions............................................................................................................ 79
+5.3 Symbol Encoding............................................................................................................................ 80
+5.4 Ordered Sets..................................................................................................................................... 81
+5.5 Transmitted Bit Ordering........................................................................................................... 83
+5.6 Packet Format................................................................................................................................. 84
+5.6.1 Packet Framing .........................................................................................................................................................84
+5.6.2 CRC .................................................................................................................................................................................86
+5.6.3 Packet Detection Errors ........................................................................................................................................89
+5.6.4 Hard Reset ...................................................................................................................................................................89
+5.6.5 Cable Reset ..................................................................................................................................................................90
+5.7 Collision Avoidance....................................................................................................................... 91
+5.8 Bi-phase Mark Coding (BMC) Signaling Scheme.............................................................. 92
+5.8.1 Encoding and signaling ..........................................................................................................................................92
+5.8.2 Transmit and Receive Masks ...............................................................................................................................96
+5.8.3 Transmitter Load Model .....................................................................................................................................103
+5.8.4 BMC Common specifications .............................................................................................................................105
+5.8.5 BMC Transmitter Specifications ......................................................................................................................106
+5.8.6 BMC Receiver Specifications .............................................................................................................................110
+5.9 Built in Self-Test (BIST)............................................................................................................ 113
+5.9.1 BIST Carrier Mode .................................................................................................................................................113
+5.9.2 BIST Test Data Mode .............................................................................................................................................113
+6 Protocol Layer . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 114
+6.1 Overview......................................................................................................................................... 114
+6.2 Messages......................................................................................................................................... 115
+6.2.1 Message Construction ..........................................................................................................................................115
+6.3 Control Message.......................................................................................................................... 128
+6.3.1 GoodCRC Message ..................................................................................................................................................129
+6.3.2 GotoMin Message (Deprecated) .......................................................................................................................129
+6.3.3 Accept Message .......................................................................................................................................................129
+6.3.4 Reject Message ........................................................................................................................................................129
+6.3.5 Ping Message ............................................................................................................................................................130
+6.3.6 PS_RDY Message .....................................................................................................................................................130
+6.3.7 Get_Source_Cap Message ....................................................................................................................................131
+6.3.8 Get_Sink_Cap Message ..........................................................................................................................................131
+Page 14 Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+6.3.9 DR_Swap Message ..................................................................................................................................................131
+6.3.10 PR_Swap Message ..................................................................................................................................................131
+6.3.11 VCONN_Swap Message ...........................................................................................................................................132
+6.3.12 Wait Message ...........................................................................................................................................................133
+6.3.13 Soft Reset Message ................................................................................................................................................134
+6.3.14 Data_Reset Message ..............................................................................................................................................135
+6.3.15 Data_Reset_Complete Message .........................................................................................................................135
+6.3.16 Not_Supported Message ......................................................................................................................................135
+6.3.17 Get_Source_Cap_Extended Message ...............................................................................................................136
+6.3.18 Get_Status Message ................................................................................................................................................136
+6.3.19 FR_Swap Message ..................................................................................................................................................136
+6.3.20 Get_PPS_Status .........................................................................................................................................................137
+6.3.21 Get_Country_Codes ................................................................................................................................................137
+6.3.22 Get_Sink_Cap_Extended Message ....................................................................................................................137
+6.3.23 Get_Source_Info Message ....................................................................................................................................137
+6.3.24 Get_Revision Message ..........................................................................................................................................137
+6.4 Data Message................................................................................................................................ 138
+6.4.1 Capabilities Message .............................................................................................................................................139
+6.4.2 Request Message ....................................................................................................................................................155
+6.4.3 BIST Message ...........................................................................................................................................................159
+6.4.4 Vendor Defined Message .....................................................................................................................................162
+6.4.5 Battery_Status Message .......................................................................................................................................196
+6.4.6 Alert Message ...........................................................................................................................................................198
+6.4.7 Get_Country_Info Message .................................................................................................................................201
+6.4.8 Enter_USB Message ...............................................................................................................................................202
+6.4.9 EPR_Request Message ..........................................................................................................................................205
+6.4.10 EPR_Mode Message ...............................................................................................................................................206
+6.4.11 Source_Info Message .............................................................................................................................................212
+6.4.12 Revision Message ...................................................................................................................................................214
+6.5 Extended Message...................................................................................................................... 215
+6.5.1 Source_Capabilities_Extended Message .......................................................................................................216
+6.5.2 Status Message ........................................................................................................................................................221
+6.5.3 Get_Battery_Cap Message ...................................................................................................................................227
+6.5.4 Get_Battery_Status Message ..............................................................................................................................227
+6.5.5 Battery_Capabilities Message ...........................................................................................................................228
+6.5.6 Get_Manufacturer_Info Message ......................................................................................................................230
+6.5.7 Manufacturer_Info Message ..............................................................................................................................231
+6.5.8 Security Messages ..................................................................................................................................................233
+6.5.9 Firmware Update Messages ..............................................................................................................................234
+6.5.10 PPS_Status Message ...............................................................................................................................................235
+6.5.11 Country_Codes Message ......................................................................................................................................237
+6.5.12 Country_Info Message ..........................................................................................................................................238
+6.5.13 Sink_Capabilities_Extended Message ............................................................................................................239
+6.5.14 Extended_Control Message ................................................................................................................................244
+6.5.15 EPR Capabilities Message ...................................................................................................................................245
+6.5.16 Vendor_Defined_Extended Message ..............................................................................................................247
+6.6 Timers.............................................................................................................................................. 249
+6.6.1 CRCReceiveTimer ...................................................................................................................................................249
+6.6.2 SenderResponseTimer .........................................................................................................................................249
+6.6.3 Capability Timers ...................................................................................................................................................249
+6.6.4 Wait Timers and Times ........................................................................................................................................251
+6.6.5 Power Supply Timers ...........................................................................................................................................251
+6.6.6 NoResponseTimer .................................................................................................................................................253
+6.6.7 BIST Timers ..............................................................................................................................................................253
+6.6.8 Power Role Swap Timers ....................................................................................................................................254
+6.6.9 Soft Reset Timers ...................................................................................................................................................254
+6.6.10 Data Reset Timers .................................................................................................................................................254
+6.6.11 Hard Reset Timers .................................................................................................................................................255
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10 Page 15
